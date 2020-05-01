@@ -24,3 +24,4 @@ class Fishhook extends Phaser.GameObjects.Sprite {
         this.x = 590;
     }
 }
+
