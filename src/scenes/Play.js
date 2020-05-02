@@ -1,3 +1,4 @@
+
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -320,7 +321,7 @@ class Play extends Phaser.Scene {
         let boom = this.add.sprite(x, y, 'explosion').setOrigin(0, 0);
         boom.anims.play('explode');
         boom.on('animationcomplete', () => {
-            this.p1Rocket.reset();
+            
             boom.destroy();
             this.gameOver = true;
         });

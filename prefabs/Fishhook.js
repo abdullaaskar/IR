@@ -16,7 +16,7 @@ class Fishhook extends Phaser.GameObjects.Sprite {
         }
 
         if (this.y >= 420){
-            this.y = 140;
+            this.y = 137.5555;
         }
     }
 
