@@ -187,6 +187,8 @@ class Play extends Phaser.Scene {
         //game over flag
         this.gameOver = false;
 
+        this.time.paused = false;
+
         this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL1', endConfig).setOrigin(0.5).setDepth(99999);
 
         //四段加速
@@ -226,6 +228,7 @@ class Play extends Phaser.Scene {
         // check key input for restart / menu
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
+            
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start("menuScene");
@@ -247,6 +250,9 @@ class Play extends Phaser.Scene {
         // 当玩家爆炸，游戏结束
         if (this.gameOver) {
             //this.p1Score = -1; // 重置score为0（这边用-1是因为每1s刷新一次）
+            this.time.paused = true;
+            game.settings.spaceshipSpeed = 2;
+            game.settings.gameTimer = 30000;
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5).setDepth(99999);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press R to Restart or ← for Menu', scoreConfig).setOrigin(0.5).setDepth(99999);
         }
@@ -323,6 +329,7 @@ class Play extends Phaser.Scene {
         boom.on('animationcomplete', () => {
             boom.destroy();
             this.gameOver = true;
+
         });
         //this.sound.play('sfx_explosion');
     }
