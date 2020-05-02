@@ -107,7 +107,7 @@ class Play extends Phaser.Scene {
         setOrigin(0, 0);
         this.cloudTop.setDepth(4200);
 
-        this.UInew = this.add.tileSprite(0, 0, 640, 480, 'UInew').
+        this.UInew = this.add.tileSprite(-60, 0, 640, 480, 'UInew').setScale(1.2,1.5).
         setOrigin(0, 0);
         this.UInew.setDepth(5000);
 
@@ -167,14 +167,14 @@ class Play extends Phaser.Scene {
         var timedEvent;
         // 每1000ms使用onEvent()一次
         timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true});
-        this.scoreLeft = this.add.text(69, 54, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(199, 37, this.p1Score, scoreConfig);
         this.scoreLeft.setDepth(99999);
 
         //typeface for ending
         let endConfig = {
             fontFamily: 'fantasy',
             fontSize: '28px',
-            backgroundColor: '#5DDEDE',
+            backgroundColor: '#F3B141',
             color: '#000000',
             align: 'right',
             padding: {
@@ -187,34 +187,34 @@ class Play extends Phaser.Scene {
         //game over flag
         this.gameOver = false;
 
-        this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL1', endConfig).setOrigin(0.5).setDepth(99999);
+        this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL1', endConfig).setOrigin(0.5).setDepth(99999);
 
         //四段加速
         endConfig.fixedWidth = 0;
 
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL2', endConfig).setOrigin(0.5).setDepth(99999);
+            this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL2', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 1.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 30000, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL3', endConfig).setOrigin(0.5).setDepth(99999);
+            this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL3', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 2.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 60000, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL4', endConfig).setOrigin(0.5).setDepth(99999);
+            this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL4', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 3.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 90000, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL5', endConfig).setOrigin(0.5).setDepth(99999);
+            this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL5', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 4.5,
             }
@@ -321,7 +321,6 @@ class Play extends Phaser.Scene {
         let boom = this.add.sprite(x, y, 'explosion').setOrigin(0, 0);
         boom.anims.play('explode');
         boom.on('animationcomplete', () => {
-            
             boom.destroy();
             this.gameOver = true;
         });
@@ -345,7 +344,7 @@ class Play extends Phaser.Scene {
         if(!this.gameOver) {
             this.p1Score += 1; // 每次使用该function的时候， p1score + 1
         }
-        this.scoreLeft = this.add.text(69, 54, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(199, 37, this.p1Score, scoreConfig);
         this.scoreLeft.setDepth(99999);
     }
 }
