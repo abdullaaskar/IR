@@ -101,7 +101,7 @@ class Play extends Phaser.Scene {
 
         this.cloudMid = this.add.tileSprite(0, 0, 640, 480, 'cloudMid').
         setOrigin(0, 0);
-        this.cloudMid.setDepth(3900);
+        this.cloudMid.setDepth(4300);
         
         this.cloudTop = this.add.tileSprite(0, 0, 640, 480, 'cloudTop').
         setOrigin(0, 0);
