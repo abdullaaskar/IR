@@ -53,7 +53,7 @@ class Menu extends Phaser.Scene {
         this.textBack =  this.add.tileSprite(centerX, 270, 624, 130, 'textBack').
         setOrigin(0.5);
 
-        this.add.text(centerX, centerY - 130, 'Where is my play yard', titleConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY - 130, 'Where  is  my  play  yard', titleConfig).setOrigin(0.5);
         this.add.text(centerX, centerY, 'Press → for story and tutorial', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + textSpacer, 'Press S to directly start the game', menuConfig).setOrigin(0.5);
     

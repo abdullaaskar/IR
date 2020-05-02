@@ -7,8 +7,8 @@ class Fishhook extends Phaser.GameObjects.Sprite {
 
     update() {
         // move hook left
-        this.x -= game.settings.spaceshipSpeed-0.997555;
-        this.y += game.settings.spaceshipSpeed-1.5;
+        this.x -= 0.09;
+        this.y += game.settings.spaceshipSpeed-1.51;
 
         // wraparound from left to right edge
         if (this.x <= 0-this.width) {
@@ -16,12 +16,12 @@ class Fishhook extends Phaser.GameObjects.Sprite {
         }
 
         if (this.y >= 420){
-            this.y = 150;
+            this.y = 140;
         }
     }
 
     reset() {
-        this.x = 590;
+        this.x = 593;
     }
 }
 

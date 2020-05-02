@@ -5,60 +5,134 @@ class Play extends Phaser.Scene {
 
     preload() {
         // load images/tile sprites
+    
         this.load.image('rocket', './assets/rocket.png');
-        this.load.image('spaceship', './assets/spaceship.png');
-        this.load.image('bottle', './assets/bottle.png');
-        this.load.image('fishship', './assets/fishship.png');
+        this.load.image('tire', './assets/tire.png');
+        this.load.image('boat', './assets/boat.png');
         this.load.image('wire', './assets/wire.png');
         this.load.image('hook', './assets/hook.png');
-        this.load.image('net', './assets/net.png');
-        this.load.image('starfield', './assets/starfield.png');
-        this.load.image('starfield1', './assets/starfield1.png');
-        this.load.image('starfield2', './assets/starfield2.png');
-        this.load.image('starfield3', './assets/starfield3.png');
-        this.load.image('starfield4', './assets/starfield4.png');
+        this.load.image('beer', './assets/beer.png');
+        this.load.image('bigStone', './assets/bigStone.png');
+        this.load.image('blueSeaweed', './assets/blueSeaweed.png');
+        this.load.image('bubble', './assets/bubble.png');
+        this.load.image('cloudMid', './assets/cloudMid.png');
+        this.load.image('cloudTop', './assets/cloudTop.png');
+        this.load.image('deepShip', './assets/deepShip.png');
+        this.load.image('fishNet', './assets/fishNet.png');
+        this.load.image('leftFish', './assets/leftFish.png');
+        this.load.image('rightFish', './assets/rightFish.png');
+        this.load.image('sand1', './assets/sand1.png');
+        this.load.image('skyMid', './assets/skyMid.png');
+        this.load.image('skyTop', './assets/skyTop.png');
+        this.load.image('smallStone', './assets/smallStone.png');
+        this.load.image('waterBase', './assets/waterBase.png');
+        this.load.image('waves', './assets/waves.png');
+        this.load.image('UInew', './assets/UInew.png');
+
+
+ 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', { frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9 });
     }
 
     create() {
         // place tile sprite
-        this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').
-            setOrigin(0, 0);
-        this.starfield0 = this.add.tileSprite(0, 50, 640, 70, 'starfield1').
-            setOrigin(0, 0);
-        this.starfield1 = this.add.tileSprite(0, 120, 640, 70, 'starfield1').
-            setOrigin(0, 0);
-        this.starfield2 = this.add.tileSprite(0, 190, 640, 70, 'starfield2').
-            setOrigin(0, 0);
-        this.starfield3 = this.add.tileSprite(0, 260, 640, 70, 'starfield3').
-            setOrigin(0, 0);
-        this.starfield4 = this.add.tileSprite(0, 330, 640, 73, 'starfield4').
-            setOrigin(0, 0);
+        this.sand1 = this.add.tileSprite(0, 0, 640, 480, 'sand1').
+        setOrigin(0, 0);
+        this.sand1.setDepth(1500);
 
-        // white rectangle borders
-        this.add.rectangle(5, 5, 630, 32, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(5, 443, 630, 32, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(5, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(603, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
-        // green UI background
-        // this.add.rectangle(37, 42, 566, 64, 0x00FF00).setOrigin(0, 0);
+        this.blueSeaweed = this.add.tileSprite(0, 0, 640, 480, 'blueSeaweed').
+        setOrigin(0, 0);
+        this.blueSeaweed.setDepth(1600);
+
+        this.smallStone = this.add.tileSprite(0, 0, 640, 480, 'smallStone').
+        setOrigin(0, 0);
+        this.smallStone.setDepth(1450);
+
+        //this.bigStone = this.add.tileSprite(0, 0, 640, 480, 'bigStone').
+        //setOrigin(0, 0);
+        //this.bigStone.setDepth(5700);
+
+        this.deepShip = this.add.tileSprite(0, 0, 640, 480, 'deepShip').
+        setOrigin(0, 0);
+        this.deepShip.setDepth(1400);
+
+        //鱼线
+        this.ship06 = new Fishwire(this, 600, -90, 'wire').setOrigin(this.x, this.y);
+        this.ship06.setDepth(3800);
+
+        this.waterBase = this.add.tileSprite(0, 0, 640, 480, 'waterBase').
+        setOrigin(0, 0);
+        this.waterBase.setDepth(1000);
+        
+
+        this.bubble = this.add.tileSprite(0, 0, 640, 480, 'bubble').
+        setOrigin(0, 0);
+        this.bubble.setDepth(2000);
+
+        
+
+        this.leftFish = this.add.tileSprite(0, 0, 640, 480, 'leftFish').
+        setOrigin(0, 0);
+        this.leftFish.setDepth(2050);
+
+        
+
+        this.rightFish = this.add.tileSprite(0, 0, 640, 480, 'rightFish').
+        setOrigin(0, 0);
+        this.rightFish.setDepth(2060);
+
+        
+
+        this.skyTop = this.add.tileSprite(0, 0, 640, 480, 'skyTop').
+        setOrigin(0, 0);
+        this.skyTop.setDepth(4000);
+
+        
+
+        this.skyMid = this.add.tileSprite(0, 0, 640, 480, 'skyMid').
+        setOrigin(0, 0);
+        this.skyMid.setDepth(3700);
+
+        this.waves = this.add.tileSprite(0, 0, 640, 480, 'waves').
+        setOrigin(0, 0);
+        this.waves.setDepth(3790);
+
+        this.cloudMid = this.add.tileSprite(0, 0, 640, 480, 'cloudMid').
+        setOrigin(0, 0);
+        this.cloudMid.setDepth(3900);
+        
+        this.cloudTop = this.add.tileSprite(0, 0, 640, 480, 'cloudTop').
+        setOrigin(0, 0);
+        this.cloudTop.setDepth(4200);
+
+        this.UInew = this.add.tileSprite(0, 0, 640, 480, 'UInew').
+        setOrigin(0, 0);
+        this.UInew.setDepth(5000);
+
+
 
         // add rocket (p1)
         this.p1Rocket = new Rocket(this, game.config.width / 2 - 8, 350, 'rocket').setOrigin(0, 0);
+        this.p1Rocket.setDepth(99999);
 
         // add spaceships (x4)
-        this.ship01 = new Spaceship(this, 4000, 132, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, 8000, 196, 'bottle', 0, 20).setOrigin(0, 0);
-        this.ship03 = new Spaceship(this, 12000, 260, 'net', 0, 10).setOrigin(0, 0);
-        this.ship04 = new Spaceship(this, game.config.width - 96, 340, 'bottle', 0, 10).setOrigin(0, 0);
+        this.ship01 = new Spaceship(this, 4000, 132, 'tire').setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, 8000, 196, 'beer').setOrigin(0, 0);
+        this.ship03 = new Spaceship(this, 12000, 260, 'fishNet').setOrigin(0, 0);
+        this.ship04 = new Spaceship(this, game.config.width - 96, 340, 'beer').setOrigin(0, 0);
+
+        this.ship01.setDepth(99999);
+        this.ship02.setDepth(99999);
+        this.ship03.setDepth(99999);
+        this.ship04.setDepth(99999);
 
         //船的运动
-        this.ship05 = new Fishship(this, 550, 70, 'fishship').setOrigin(0, 0);
-        //鱼线
-        this.ship06 = new Fishwire(this, 600, -90, 'wire').setOrigin(this.x, this.y);
+        this.ship05 = new Fishship(this, 550, 70, 'boat').setOrigin(0, 0);
+        this.ship05.setDepth(99999);
         //鱼钩
         this.ship07 = new Fishhook(this, 595, 140, 'hook').setOrigin(0, 0);
+        this.ship07.setDepth(99999);
 
         // define keys
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -88,10 +162,12 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.p1Score = 0;
+        
         var timedEvent;
         // 每1000ms使用onEvent()一次
         timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true});
         this.scoreLeft = this.add.text(69, 54, this.p1Score, scoreConfig);
+        this.scoreLeft.setDepth(99999);
 
         //typeface for ending
         let endConfig = {
@@ -107,46 +183,37 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
 
-        //get timer
-        //timer tutorial: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/
-        var timer = this.time.addEvent({
-            delay: 1000,
-            callback: this.isTiming,
-            callbackScope: this,
-            repeat: (game.settings.gameTimer / 1000) + 1,
-        });
-
         //game over flag
         this.gameOver = false;
 
-        this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL1', endConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL1', endConfig).setOrigin(0.5).setDepth(99999);
 
         //四段加速
         endConfig.fixedWidth = 0;
 
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL2', endConfig).setOrigin(0.5);
+            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL2', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 1.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 30000, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL3', endConfig).setOrigin(0.5);
+            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL3', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 2.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 60000, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL4', endConfig).setOrigin(0.5);
+            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL4', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 3.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 90000, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL5', endConfig).setOrigin(0.5);
+            this.add.text(game.config.width / 2, game.config.height / 2 - 180, 'LEVEL5', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
                 spaceshipSpeed: game.settings.spaceshipSpeed + 4.5,
             }
@@ -178,23 +245,28 @@ class Play extends Phaser.Scene {
 
         // 当玩家爆炸，游戏结束
         if (this.gameOver) {
-            this.p1Score = -1; // 重置score为0（这边用-1是因为每1s刷新一次）
-            this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press R to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
+            //this.p1Score = -1; // 重置score为0（这边用-1是因为每1s刷新一次）
+            this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5).setDepth(99999);
+            this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press R to Restart or ← for Menu', scoreConfig).setOrigin(0.5).setDepth(99999);
         }
 
         //scroll starfield
-        this.starfield0.tilePositionX -= 3;
-        this.starfield1.tilePositionX -= 2.5;
-        this.starfield2.tilePositionX -= 2;
-        this.starfield3.tilePositionX -= 1.5;
-        this.starfield4.tilePositionX -= 1;
+        this.sand1.tilePositionX += 1  ;
+        this.blueSeaweed.tilePositionX += 1.5;
+        this.smallStone.tilePositionX += 1.1;
+        //this.bigStone.tilePositionX += 0.9;
+        this.deepShip.tilePositionX += 0.7;
 
-        this.starfield0.tilePositionY -= 0.3;
-        this.starfield1.tilePositionY -= 0.3;
-        this.starfield2.tilePositionY -= 0.3;
-        this.starfield3.tilePositionY -= 0.3;
-        this.starfield4.tilePositionY -= 0.3;
+        this.leftFish.tilePositionX += 1.3;
+        this.rightFish.tilePositionX -= 0.5;
+
+        this.bubble.tilePositionX += 0.7;
+        this.bubble.tilePositionY += 0.7;
+
+        this.cloudTop.tilePositionX += 0.8;
+        this.cloudMid.tilePositionX += 1;
+
+      
 
         if (!this.gameOver) {
             this.p1Rocket.update();         // update rocket sprite
@@ -252,7 +324,7 @@ class Play extends Phaser.Scene {
             boom.destroy();
             this.gameOver = true;
         });
-        this.sound.play('sfx_explosion');
+        //this.sound.play('sfx_explosion');
     }
 
     // change score
@@ -269,7 +341,10 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.p1Score += 1; // 每次使用该function的时候， p1score + 1
+        if(!this.gameOver) {
+            this.p1Score += 1; // 每次使用该function的时候， p1score + 1
+        }
         this.scoreLeft = this.add.text(69, 54, this.p1Score, scoreConfig);
+        this.scoreLeft.setDepth(99999);
     }
 }
