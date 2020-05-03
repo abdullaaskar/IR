@@ -6,14 +6,11 @@ class Play extends Phaser.Scene {
 
     preload() {
         // load images/tile sprites
-    
-        this.load.image('rocket', './assets/rocket.png');
         this.load.image('tire', './assets/tire.png');
         this.load.image('boat', './assets/boat.png');
         this.load.image('wire', './assets/wire.png');
         this.load.image('hook', './assets/hook.png');
         this.load.image('beer', './assets/beer.png');
-        this.load.image('bigStone', './assets/bigStone.png');
         this.load.image('blueSeaweed', './assets/blueSeaweed.png');
         this.load.image('bubble', './assets/bubble.png');
         this.load.image('cloudMid', './assets/cloudMid.png');
@@ -62,17 +59,14 @@ class Play extends Phaser.Scene {
         setOrigin(0, 0);
         this.smallStone.setDepth(1450);
 
-        //this.bigStone = this.add.tileSprite(0, 0, 640, 480, 'bigStone').
-        //setOrigin(0, 0);
-        //this.bigStone.setDepth(5700);
 
         this.deepShip = this.add.tileSprite(0, 0, 640, 480, 'deepShip').
         setOrigin(0, 0);
         this.deepShip.setDepth(1400);
 
         //鱼线
-        this.ship06 = new Fishwire(this, 600, -90, 'wire').setOrigin(this.x, this.y);
-        this.ship06.setDepth(3800);
+        this.wire = new Fishwire(this, 600, -90, 'wire').setOrigin(this.x, this.y);
+        this.wire.setDepth(3800);
 
         this.waterBase = this.add.tileSprite(0, 0, 640, 480, 'waterBase').
         setOrigin(0, 0);
@@ -125,33 +119,36 @@ class Play extends Phaser.Scene {
 
 
 
-        // add rocket (p1)
-        this.p1Rocket = new Rocket(this, game.config.width / 2 - 8, 350, 'player').setOrigin(0, 0);
+        // add fish (p1)
+        this.p1Fish = new Fish(this, game.config.width / 2 - 8, 350, 'player').setOrigin(0, 0);
         this.anims.create({
             key: 'p1Moving',
             repeat: -1,
             frames: this.anims.generateFrameNumbers('player', {start: 0, end: 7, first: 0}),
             frameRate: 6
         });
-        this.p1Rocket.setDepth(99999);
+        this.p1Fish.setDepth(99999);
 
-        // add spaceships (x4)
-        this.ship01 = new Spaceship(this, 4000, 132, 'tire').setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, 8000, 196, 'beer').setOrigin(0, 0);
-        this.ship03 = new Spaceship(this, 12000, 260, 'fishNet').setOrigin(0, 0);
-        this.ship04 = new Spaceship(this, game.config.width - 96, 340, 'beer').setOrigin(0, 0);
+        // add obstacles (x4)
+        this.tire1 = new Obstacle(this, 12000, 132, 'tire').setOrigin(0, 0);
+        this.beer1 = new Obstacle(this, 8000, 196, 'beer').setOrigin(0, 0);
+        this.fishNet = new Obstacle(this, 5000, 260, 'fishNet').setOrigin(0, 0);
+        this.beer2 = new Obstacle(this, game.config.width - 96, 340, 'beer').setOrigin(0, 0);
+        this.tire2 = new Obstacle(this, game.config.width, 190, 'tire').setOrigin(0, 0);
+        
 
-        this.ship01.setDepth(99999);
-        this.ship02.setDepth(99999);
-        this.ship03.setDepth(99999);
-        this.ship04.setDepth(99999);
+        this.tire1.setDepth(99999);
+        this.beer1.setDepth(99999);
+        this.fishNet.setDepth(99999);
+        this.beer2.setDepth(99999);
+        this.tire2.setDepth(99999);
 
         //船的运动
-        this.ship05 = new Fishship(this, 550, 70, 'boat').setOrigin(0, 0);
-        this.ship05.setDepth(99999);
+        this.boat = new Fishship(this, 550, 70, 'boat').setOrigin(0, 0);
+        this.boat.setDepth(99999);
         //鱼钩
-        this.ship07 = new Fishhook(this, 595, 140, 'hook').setOrigin(0, 0);
-        this.ship07.setDepth(99999);
+        this.hook = new Fishhook(this, 595, 140, 'hook').setOrigin(0, 0);
+        this.hook.setDepth(99999);
 
         // define keys
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -215,28 +212,28 @@ class Play extends Phaser.Scene {
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL2', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
-                spaceshipSpeed: game.settings.spaceshipSpeed + 1.5,
+                fishSpeed: game.settings.fishSpeed + 1.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 30000, () => {
             this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL3', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
-                spaceshipSpeed: game.settings.spaceshipSpeed + 2.5,
+                fishSpeed: game.settings.fishSpeed + 2.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 60000, () => {
             this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL4', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
-                spaceshipSpeed: game.settings.spaceshipSpeed + 3.5,
+                fishSpeed: game.settings.fishSpeed + 3.5,
             }
         }, null, this);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer + 90000, () => {
             this.add.text(game.config.width / 2 + 65, game.config.height / 2 - 182, 'LEVEL5', endConfig).setOrigin(0.5).setDepth(99999);
             game.settings = {
-                spaceshipSpeed: game.settings.spaceshipSpeed + 4.5,
+                fishSpeed: game.settings.fishSpeed + 4.5,
             }
         }, null, this);
 
@@ -244,7 +241,7 @@ class Play extends Phaser.Scene {
 
     update() {
 
-        this.p1Rocket.play('p1Moving',true);
+        this.p1Fish.play('p1Moving',true);
         // check key input for restart / menu
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
@@ -273,17 +270,16 @@ class Play extends Phaser.Scene {
         if (this.gameOver) {
             //this.p1Score = -1; // 重置score为0（这边用-1是因为每1s刷新一次）
             this.time.paused = true;
-            game.settings.spaceshipSpeed = 2;
+            game.settings.fishSpeed = 2;
             game.settings.gameTimer = 30000;
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5).setDepth(99999);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press R to Restart or ← for Menu', scoreConfig).setOrigin(0.5).setDepth(99999);
         }
 
-        //scroll starfield
+        //scroll background
         this.sand1.tilePositionX += 1  ;
         this.blueSeaweed.tilePositionX += 1.5;
         this.smallStone.tilePositionX += 1.1;
-        //this.bigStone.tilePositionX += 0.9;
         this.deepShip.tilePositionX += 0.7;
 
         this.leftFish.tilePositionX += 1.3;
@@ -298,44 +294,50 @@ class Play extends Phaser.Scene {
       
 
         if (!this.gameOver) {
-            this.p1Rocket.update();         // update rocket sprite
-            this.ship01.update();           // update spaceships (x4)
-            this.ship02.update();
-            this.ship03.update();
-            this.ship04.update();
-            this.ship05.update();
-            this.ship06.update();
-            this.ship07.update();
+            this.p1Fish.update();         // update player sprite
+            this.tire1.update();           // update obstacles
+            this.beer1.update();
+            this.fishNet.update();
+            this.beer2.update();
+            this.boat.update();
+            this.wire.update();
+            this.hook.update();
+            this.tire2.update();
+
         }
         // check collisions
-        if (this.checkCollision(this.p1Rocket, this.ship07)) {
-            this.shipExplode(this.ship07); 
-            this.rocketExplode(this.p1Rocket.x, this.p1Rocket.y);
+        if (this.checkCollision(this.p1Fish, this.tire2)) {
+            this.shipExplode(this.tire2); 
+            this.fishExplode(this.p1Fish.x, this.p1Fish.y);
         }
-        if (this.checkCollision(this.p1Rocket, this.ship04)) {
-            this.shipExplode(this.ship04); 
-            this.rocketExplode(this.p1Rocket.x, this.p1Rocket.y);
+        if (this.checkCollision(this.p1Fish, this.hook)) {
+            this.shipExplode(this.hook); 
+            this.fishExplode(this.p1Fish.x, this.p1Fish.y);
         }
-        if (this.checkCollision(this.p1Rocket, this.ship03)) {
-            this.shipExplode(this.ship03); 
-            this.rocketExplode(this.p1Rocket.x, this.p1Rocket.y);
+        if (this.checkCollision(this.p1Fish, this.beer2)) {
+            this.shipExplode(this.beer2); 
+            this.fishExplode(this.p1Fish.x, this.p1Fish.y);
         }
-        if (this.checkCollision(this.p1Rocket, this.ship02)) {
-            this.shipExplode(this.ship02);
-            this.rocketExplode(this.p1Rocket.x, this.p1Rocket.y);
+        if (this.checkCollision(this.p1Fish, this.fishNet)) {
+            this.shipExplode(this.fishNet); 
+            this.fishExplode(this.p1Fish.x, this.p1Fish.y);
         }
-        if (this.checkCollision(this.p1Rocket, this.ship01)) {
-            this.shipExplode(this.ship01);
-            this.rocketExplode(this.p1Rocket.x, this.p1Rocket.y);
+        if (this.checkCollision(this.p1Fish, this.beer1)) {
+            this.shipExplode(this.beer1);
+            this.fishExplode(this.p1Fish.x, this.p1Fish.y);
+        }
+        if (this.checkCollision(this.p1Fish, this.tire1)) {
+            this.shipExplode(this.tire1);
+            this.fishExplode(this.p1Fish.x, this.p1Fish.y);
         }
     }
 
-    checkCollision(rocket, ship) {
+    checkCollision(fish, obstacle) {
         // simple AABB checking
-        if (rocket.x < ship.x + ship.width &&
-            rocket.x + rocket.width > ship.x &&
-            rocket.y < ship.y + ship.height &&
-            rocket.height + rocket.y > ship.y) {
+        if (fish.x < obstacle.x + obstacle.width &&
+            fish.x + fish.width > obstacle.x &&
+            fish.y < obstacle.y + obstacle.height &&
+            fish.height + fish.y > obstacle.y) {
             return true;
         } else {
             return false;
@@ -344,9 +346,9 @@ class Play extends Phaser.Scene {
 
 
     // 玩家爆炸
-    rocketExplode(x, y) {
-        this.p1Rocket.alpha = 0;
-        this.p1Rocket.reset();
+    fishExplode(x, y) {
+        this.p1Fish.alpha = 0;
+        this.p1Fish.reset();
 
         let boom = this.add.sprite(x, y, 'explosion').setOrigin(0, 0);
 
@@ -360,11 +362,11 @@ class Play extends Phaser.Scene {
     }
     
     //障碍物爆炸
-    shipExplode(ship){
+    shipExplode(obstacle){
 
-        //temporarily hide ship
-        ship.alpha = 0;
-        ship.reset();
+        //temporarily hide obstacle
+        obstacle.alpha = 0;
+        obstacle.reset();
     }
 
 
