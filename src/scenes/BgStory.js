@@ -10,6 +10,7 @@ class BgStory extends Phaser.Scene {
         this.load.image('UI old',  './assets/UI old.png');
         this.load.image('mainBack', './assets/mainback.png');
         this.load.image('textBack', './assets/textBack.png');
+        this.load.audio('choco','./assets/chocobirdsrun.mp3');
     }
 
     create(){
